@@ -1,0 +1,378 @@
+public class ConnectionTest {
+    public static void main(String[] args){
+        HttpURLConnection connection = null;
+        BufferedReader read  = null;
+        StringBuilder builder = null;
+        String line = null;
+
+        URL serverAddress = null;
+
+        //what happens when you use a normal address? It returns the html that is on the page that you would normally have when
+        //you go to the website.
+        try {
+            serverAddress = new URL("https://google.com");
+            //set up out communications stuff
+            connection = null;
+
+            //Set up the initial connection
+            connection = (HttpURLConnection)serverAddress.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setReadTimeout(10000);
+
+            connection.connect();
+
+            //read the result from the server
+            read  = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            builder = new StringBuilder();
+            //take the result from the server and build it into a string to output
+           while ((line = read.readLine()) != null)
+            {
+                builder.append(line + '\n');
+            }
+
+            System.out.println(builder.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //close the connection, set all objects to null
+            connection.disconnect();
+            read = null;
+            builder = null;
+            connection = null;
+        }
+
+        //what happens if i go to a page on a domain that does not exist. It gives a file not found exception, not a 404.
+        try {
+            serverAddress = new URL("http://hudrlik.org/stuff/stuff.php");
+            //set up out communications stuff
+            connection = null;
+
+            //Set up the initial connection
+            connection = (HttpURLConnection)serverAddress.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setReadTimeout(10000);
+
+            connection.connect();
+
+            //read the result from the server
+            read  = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            builder = new StringBuilder();
+            //take the result from the server and build it into a string to output
+            while ((line = read.readLine()) != null)
+            {
+                builder.append(line + '\n');
+            }
+
+            System.out.println(builder.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //close the connection, set all objects to null
+            connection.disconnect();
+            read = null;
+            builder = null;
+            connection = null;
+        }
+        //put in an ip address rather than a string. WHen wifi is off, it gives a network unreachable error.
+        try {
+            serverAddress = new URL("http://173.254.28.132");
+            //set up out communications stuff
+            connection = null;
+
+            //Set up the initial connection
+            connection = (HttpURLConnection)serverAddress.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setReadTimeout(10000);
+
+            connection.connect();
+
+            //read the result from the server
+            read  = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            builder = new StringBuilder();
+            //take the result from the server and build it into a string to output
+            while ((line = read.readLine()) != null)
+            {
+                builder.append(line + '\n');
+            }
+
+            System.out.println(builder.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //close the connection, set all objects to null
+            connection.disconnect();
+            read = null;
+            builder = null;
+            connection = null;
+        }
+
+        //what happens if you go to a nonexistant website? returns an unknown host exception. If there is no internet connection, when you go to a domain it will always give an unknown host
+        try {
+            serverAddress = new URL("http://asddghasidhgpaishdhipoasg.com");
+            //set up out communications stuff
+            connection = null;
+
+            //Set up the initial connection
+            connection = (HttpURLConnection)serverAddress.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setReadTimeout(10000);
+
+            connection.connect();
+
+            //read the result from the server
+            read  = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            builder = new StringBuilder();
+            //take the result from the server and build it into a string to output
+            while ((line = read.readLine()) != null)
+            {
+                builder.append(line + '\n');
+            }
+
+            System.out.println(builder.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //close the connection, set all objects to null
+            connection.disconnect();
+            read = null;
+            builder = null;
+            connection = null;
+        }
+
+
+        //what happens when the connection address is an image. It connects just fine
+        try {
+            serverAddress = new URL("http://hudrlik.org/images/picture.jpg");
+            //set up out communications stuff
+            connection = null;
+
+            //Set up the initial connection
+            connection = (HttpURLConnection)serverAddress.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setReadTimeout(10000);
+
+            connection.connect();
+
+            //read the result from the server
+            read  = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            //Only reading the first line becase it is just jibberish and don't need to display a ton of jibberish. The connection works though.
+            System.out.println(read.readLine());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //close the connection, set all objects to null
+            connection.disconnect();
+            read = null;
+            builder = null;
+            connection = null;
+        }
+
+        //What happens when i change the get to post? It gives an IO exception if you try read the result from the server
+        // if you just try to establish the connection, it still works fine.
+        try {
+            serverAddress = new URL("https://google.com");
+            //set up out communications stuff
+            connection = null;
+
+            //Set up the initial connection
+            connection = (HttpURLConnection)serverAddress.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setReadTimeout(10000);
+
+            connection.connect();
+
+            //read the result from the server
+            read  = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            builder = new StringBuilder();
+            //take the result from the server and build it into a string to output
+            while ((line = read.readLine()) != null)
+            {
+                builder.append(line + '\n');
+            }
+
+            System.out.println(builder.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //close the connection, set all objects to null
+            connection.disconnect();
+            read = null;
+            builder = null;
+            connection = null;
+        }
+
+        //what happens when the readTimeout is set to a negitive number? Throws an Illegal argument exception
+        //timeouts can't be negitive
+        try {
+            serverAddress = new URL("https://google.com");
+            //set up out communications stuff
+            connection = null;
+
+            //Set up the initial connection
+            connection = (HttpURLConnection)serverAddress.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setReadTimeout(-10000);
+
+            connection.connect();
+
+            //read the result from the server
+            read  = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            builder = new StringBuilder();
+            //take the result from the server and build it into a string to output
+            while ((line = read.readLine()) != null)
+            {
+                builder.append(line + '\n');
+            }
+
+            System.out.println(builder.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //close the connection, set all objects to null
+            connection.disconnect();
+            read = null;
+            builder = null;
+            connection = null;
+        }
+
+        //what happens when you set the doOutput to false? In this context it still runs just fine.
+        try {
+            serverAddress = new URL("https://google.com");
+            //set up out communications stuff
+            connection = null;
+
+            //Set up the initial connection
+            connection = (HttpURLConnection)serverAddress.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(false);
+            connection.setReadTimeout(10000);
+
+            connection.connect();
+
+            //read the result from the server
+            read  = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            builder = new StringBuilder();
+            //take the result from the server and build it into a string to output
+            while ((line = read.readLine()) != null)
+            {
+                builder.append(line + '\n');
+            }
+
+            System.out.println(builder.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //close the connection, set all objects to null
+            connection.disconnect();
+            read = null;
+            builder = null;
+            connection = null;
+        }
+
+        //get some json from the internet that could be parsed later in some application
+        try {
+            serverAddress = new URL("http://jsonplaceholder.typicode.com/posts");
+            //set up out communications stuff
+            connection = null;
+
+            //Set up the initial connection
+            connection = (HttpURLConnection)serverAddress.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setReadTimeout(10000);
+
+            connection.connect();
+
+            //read the result from the server
+            read  = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            builder = new StringBuilder();
+            //take the result from the server and build it into a string to output
+            while ((line = read.readLine()) != null)
+            {
+                builder.append(line + '\n');
+            }
+
+            System.out.println(builder.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //close the connection, set all objects to null
+            connection.disconnect();
+            read = null;
+            builder = null;
+            connection = null;
+        }
+
+        //what happens when the url is not a valid url? Throws a MalformedURLException because there is no protocol
+        try {
+            serverAddress = new URL("not a url at all");
+            //set up out communications stuff
+            connection = null;
+
+            //Set up the initial connection
+            connection = (HttpURLConnection)serverAddress.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setReadTimeout(10000);
+
+            connection.connect();
+
+            //read the result from the server
+            read  = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            builder = new StringBuilder();
+            //take the result from the server and build it into a string to output
+            while ((line = read.readLine()) != null)
+            {
+                builder.append(line + '\n');
+            }
+
+            System.out.println(builder.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //close the connection, set all objects to null
+            connection.disconnect();
+            read = null;
+            builder = null;
+            connection = null;
+        }
+    }
+
+}
